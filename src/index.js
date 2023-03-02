@@ -4,15 +4,6 @@ import { fetchCountries } from './fetchCountries';
 import './css/styles.css';
 
 const DEBOUNCE_DELAY = 300;
-// const FILTER_CONFIG = {
-//   name: name.official,
-//   city: capital,
-//   population,
-//   flags: {
-//     svg,
-//   },
-//   languages,
-// };
 
 const refs = {
   inputEl: document.querySelector('#search-box'),
