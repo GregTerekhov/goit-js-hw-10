@@ -21,6 +21,27 @@ body {
 
 .country-list {
   list-style: none;
-  margin: 0;
-  padding: 0;
+}
+
+.country-list__item {
+  display: flex;
+  align-items: center;
+}
+
+.country-list__item:not(:last-child) {
+  margin-bottom: 32px;
+}
+
+.country-list__name {
+  margin-left: 24px;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.country-info {
+  margin-left: 40px;
+}
+
+.country-info__data {
+  font-size: 20px;
 }

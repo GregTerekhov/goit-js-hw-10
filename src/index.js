@@ -13,7 +13,6 @@ const DEBOUNCE_DELAY = 300;
 //   },
 //   languages,
 // };
-const BASE_URL = 'https://restcountries.com/v2';
 
 const refs = {
   inputEl: document.querySelector('#search-box'),
@@ -40,7 +39,7 @@ function renderCountriesName(countriesName) {
       'Too many matches found. Please enter a more specific name.'
     );
   }
-  if (countriesName > 2 && countriesName <= 10) {
+  if (countriesName.length >= 2 && countriesName.length <= 10) {
     renderCountryIdentification(countriesName);
   } else {
     renderCountryIdentification(countriesName);
@@ -51,7 +50,7 @@ function renderCountriesName(countriesName) {
 function renderCountryIdentification(countriesName) {
   const markupCountry = countriesName
     .map(({ name, flags }) => {
-      return `<li><img src="${flags.svg}" alt="${name.common}" width="25" height="15"><span>${name.official}</span></li>`;
+      return `<li class = "country-list__item"><img src="${flags.svg}" alt="${name.common}" width="60" height="45"><span class = "country-list__name">${name.official}</span></li>`;
     })
     .join('');
   refs.countriesList.innerHTML = markupCountry;
@@ -60,9 +59,9 @@ function renderCountryIdentification(countriesName) {
 function renderCountryData(countriesName) {
   const markupInfo = countriesName
     .map(({ capital, population, languages }) => {
-      return `<p>${capital}</p><p>${population}</p><p>${Object.values(
+      return `<p class = "country-info__data">Capital: ${capital}</p><p class = "country-info__data">Population: ${population}</p><p class = "country-info__data">Languages: ${Object.values(
         languages
-      ).join('')}</p>`;
+      ).join(', ')}</p>`;
     })
     .join('');
   refs.countriesInfo.innerHTML = markupInfo;
