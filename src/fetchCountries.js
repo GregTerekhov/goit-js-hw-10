@@ -1,18 +1,15 @@
-const BASE_URL = 'https://restcountries.com/v3.1';
-const FILTER_CONFIG = {
-  name,
-  capital,
-  population,
-  flags,
-  languages,
-};
+import Notiflix from 'notiflix';
+export { fetchCountries };
 
-export function fetchCountries(name) {
-  return fetch(
-    `${BASE_URL}/name/${name}?fields=${Object.keys(FILTER_CONFIG)}`
-  ).then(response => {
+const BASE_URL = 'https://restcountries.com/v3.1';
+const FILTER_RESPONSE = '?fields=name,capital,population,flags,languages';
+
+function fetchCountries(name) {
+  return fetch(`${BASE_URL}/name/${name}${FILTER_RESPONSE}`).then(response => {
     if (!response.ok) {
-      throw new Error('Oops, there is no country with that name');
+      throw new Error(
+        Notiflix.Notify.failure('Oops, there is no country with that name')
+      );
     }
     return response.json();
   });

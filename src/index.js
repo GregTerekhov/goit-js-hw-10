@@ -32,6 +32,7 @@ function renderCountriesName(countriesName) {
   }
   if (countriesName.length >= 2 && countriesName.length <= 10) {
     renderCountryIdentification(countriesName);
+    refs.countriesInfo.innerHTML = '';
   } else {
     renderCountryIdentification(countriesName);
     renderCountryData(countriesName);
@@ -50,12 +51,10 @@ function renderCountryIdentification(countriesName) {
 function renderCountryData(countriesName) {
   const markupInfo = countriesName
     .map(({ capital, population, languages }) => {
-      return `<p class = "country-info__data">Capital: ${capital}</p><p class = "country-info__data">Population: ${population}</p><p class = "country-info__data">Languages: ${Object.values(
+      return `<p class = "country-info__data"><b>Capital:</b> ${capital}</p><p class = "country-info__data"><b>Population:</b> ${population}</p><p class = "country-info__data"><b>Languages:</b> ${Object.values(
         languages
       ).join(', ')}</p>`;
     })
     .join('');
   refs.countriesInfo.innerHTML = markupInfo;
 }
-
-// ${refs.country}?fields=${FILTER_CONFIG}
