@@ -36,7 +36,7 @@ function renderCountriesName(countriesName) {
   }
   if (countriesName.length >= 2 && countriesName.length <= 10) {
     renderCountryIdentification(countriesName);
-    refs.countriesInfo.innerHTML = '';
+    refs.countriesInfo.innerHTML = ''; // це для очищення непотрібної розмітки, коли після вибору валідного значення інпуту відображався варіант з однією країною і додатковою інформацією, а після віднімання однієї літери умова відображення змінилась
   } else {
     renderCountryIdentification(countriesName);
     renderCountryData(countriesName);
