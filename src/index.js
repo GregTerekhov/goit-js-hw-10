@@ -3,6 +3,7 @@ import Notiflix from 'notiflix';
 import { fetchCountries } from './fetchCountries';
 import './css/styles.css';
 
+// Глобальні змінні
 const DEBOUNCE_DELAY = 300;
 
 const refs = {
@@ -11,8 +12,10 @@ const refs = {
   countriesInfo: document.querySelector('.country-info'),
 };
 
+// слухач події
 refs.inputEl.addEventListener('input', debounce(fetchByInput, DEBOUNCE_DELAY));
 
+// Отримання результату з сервера
 function fetchByInput() {
   const country = refs.inputEl.value.trim();
   if (!country) {
@@ -22,16 +25,19 @@ function fetchByInput() {
   return fetchCountries(country).then(renderCountries).catch(showError);
 }
 
+// Очищення розмітки
 function clearMarkup() {
   refs.countriesList.innerHTML = '';
   refs.countriesInfo.innerHTML = '';
 }
 
+// Відображення помилки
 function showError() {
   clearMarkup();
   return Notiflix.Notify.failure('Oops, there is no country with that name');
 }
 
+// Варіанти рендерінгу згідно введених даних
 function renderCountries(countriesName) {
   clearMarkup();
   if (countriesName.length > 10) {
@@ -47,6 +53,7 @@ function renderCountries(countriesName) {
   }
 }
 
+// Рендерінг розмітки варіанта декілька країни
 function renderCountryIdentification(countriesName) {
   const markupCountry = countriesName
     .map(({ name, flags }) => {
@@ -56,6 +63,7 @@ function renderCountryIdentification(countriesName) {
   refs.countriesList.innerHTML = markupCountry;
 }
 
+// Рендерінг розмітки варіанту однієї країни з додатковою інформацією
 function renderCountryData(countriesName) {
   const markupInfo = countriesName
     .map(({ capital, population, languages }) => {
