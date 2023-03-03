@@ -21,7 +21,11 @@ function onInputData() {
     return;
   }
 
-  return fetchCountries(country).then(renderCountriesName);
+  return fetchCountries(country)
+    .then(renderCountriesName)
+    .catch(error =>
+      Notiflix.Notify.failure('Oops, there is no country with that name')
+    );
 }
 
 function renderCountriesName(countriesName) {
