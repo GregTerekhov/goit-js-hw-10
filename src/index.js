@@ -19,7 +19,7 @@ function fetchByInput() {
     clearMarkup();
     return;
   }
-  return fetchCountries(country).then(renderCountriesName).catch(showError);
+  return fetchCountries(country).then(renderCountries).catch(showError);
 }
 
 function clearMarkup() {
@@ -32,7 +32,7 @@ function showError() {
   return Notiflix.Notify.failure('Oops, there is no country with that name');
 }
 
-function renderCountriesName(countriesName) {
+function renderCountries(countriesName) {
   clearMarkup();
   if (countriesName.length > 10) {
     return Notiflix.Notify.info(
