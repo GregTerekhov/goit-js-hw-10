@@ -1,4 +1,3 @@
-import Notiflix from 'notiflix';
 export { fetchCountries };
 
 const BASE_URL = 'https://restcountries.com/v3.1';

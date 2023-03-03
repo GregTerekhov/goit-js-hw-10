@@ -11,24 +11,29 @@ const refs = {
   countriesInfo: document.querySelector('.country-info'),
 };
 
-refs.inputEl.addEventListener('input', debounce(onInputData, DEBOUNCE_DELAY));
+refs.inputEl.addEventListener('input', debounce(fetchByInput, DEBOUNCE_DELAY));
 
-function onInputData() {
+function fetchByInput() {
   const country = refs.inputEl.value.trim();
   if (!country) {
-    refs.countriesList.innerHTML = '';
-    refs.countriesInfo.innerHTML = '';
+    clearMarkup();
     return;
   }
+  return fetchCountries(country).then(renderCountriesName).catch(showError);
+}
 
-  return fetchCountries(country)
-    .then(renderCountriesName)
-    .catch(error =>
-      Notiflix.Notify.failure('Oops, there is no country with that name')
-    );
+function clearMarkup() {
+  refs.countriesList.innerHTML = '';
+  refs.countriesInfo.innerHTML = '';
+}
+
+function showError() {
+  clearMarkup();
+  return Notiflix.Notify.failure('Oops, there is no country with that name');
 }
 
 function renderCountriesName(countriesName) {
+  clearMarkup();
   if (countriesName.length > 10) {
     return Notiflix.Notify.info(
       'Too many matches found. Please enter a more specific name.'
@@ -36,7 +41,6 @@ function renderCountriesName(countriesName) {
   }
   if (countriesName.length >= 2 && countriesName.length <= 10) {
     renderCountryIdentification(countriesName);
-    refs.countriesInfo.innerHTML = ''; // це для очищення непотрібної розмітки, коли після вибору валідного значення інпуту відображався варіант з однією країною і додатковою інформацією, а після віднімання однієї літери умова відображення змінилась
   } else {
     renderCountryIdentification(countriesName);
     renderCountryData(countriesName);
